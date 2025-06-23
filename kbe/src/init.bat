@@ -114,7 +114,7 @@ xcopy %OUT_DIR% %OUT_DLLS_DIR% /Y /i /e
 
 
 
-set pyconfig=%SOLUTION_DIR%lib\python\PCbuild\amd64
+set pyconfig=%SOLUTION_DIR%lib\python\PCbuild\amd64\pyconfig.h
 set out_pyconfig=%SOLUTION_DIR%lib\python\Include
 
 echo [10] 正在复制 %pyconfig% 到 %out_pyconfig%
