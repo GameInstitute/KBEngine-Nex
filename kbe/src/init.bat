@@ -102,15 +102,29 @@ set LIBS_DIR=%SOLUTION_DIR%lib\python\Lib
 set OUT_LIBS_DIR=%~dp0..\res\scripts\common\Lib
 set OUT_DLLS_DIR=%~dp0..\res\scripts\common\DLLs
 
-echo [7] 正在复制 %LIBS_DIR% 到 %OUT_LIBS_DIR%
+echo [8] 正在复制 %LIBS_DIR% 到 %OUT_LIBS_DIR%
 
 xcopy %LIBS_DIR% %OUT_LIBS_DIR% /Y /i /e
 
 
 
-echo [8] 正在复制 %OUT_DIR% 到 %OUT_DLLS_DIR%
+echo [9] 正在复制 %OUT_DIR% 到 %OUT_DLLS_DIR%
 
 xcopy %OUT_DIR% %OUT_DLLS_DIR% /Y /i /e
+
+
+
+set pyconfig=%SOLUTION_DIR%lib\python\PCbuild\amd64
+set out_pyconfig=%SOLUTION_DIR%lib\python\Include
+
+echo [10] 正在复制 %pyconfig% 到 %out_pyconfig%
+copy /Y "%pyconfig%" "%out_pyconfig%"
+if errorlevel 1 (
+    echo [ERROR] 拷贝 %pyconfig% 文件失败。
+    pause
+    exit /b 1
+)
+
 
 echo 操作完成 
 

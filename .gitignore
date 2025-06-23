@@ -38,10 +38,10 @@ Thumbs.db
 # -------------[ make files ]------------------------ #
 /kbe/res/scripts/common/lib-dynload/
 /kbe/res/scripts/common/Lib
-# /kbe/src/lib/python
+/kbe/src/lib/python
 /kbe/src/lib/dependencies
 
-# /kbe/src/lib/python/build
+/kbe/src/lib/python/PCbuild
 .deps
 *.o
 *.d
@@ -73,7 +73,9 @@ kbe/bin/server/logger.lib
 kbe/bin/server/loginapp.lib
 kbe/bin/server/machine.lib
 kbe/bin/server/python37_d.dll
+kbe/bin/server/python313_d.dll
 kbe/bin/server/vcruntime140.dll
+kbe/bin/server/vcruntime140_1.dll
 kbe/src/.vs
 
 
@@ -98,6 +100,7 @@ kbe/src/libs/navigation_d.lib
 kbe/src/libs/network_d.lib
 kbe/src/libs/pyscript_d.lib
 kbe/src/libs/python37_d.lib
+kbe/src/libs/python313_d.lib
 kbe/src/libs/resmgr_d.lib
 kbe/src/libs/server_d.lib
 kbe/src/libs/ssleay32_d.lib
@@ -110,6 +113,7 @@ kbe/tools/server/guiconsole/guiconsole.log
 kbe/tools/server/guiconsole/guiconsole.log.1
 kbe/tools/server/guiconsole/histroycommands.xml
 kbe/tools/server/guiconsole/python37_d.dll
+kbe/tools/server/guiconsole/python313_d.dll
 
 # kbe/src/lib/entitydef/py_entitydef.cpp
 
@@ -165,6 +169,7 @@ kbe/src/libs/navigation.lib
 kbe/src/libs/network.lib
 kbe/src/libs/pyscript.lib
 kbe/src/libs/python37.lib
+kbe/src/libs/python313.lib
 kbe/src/libs/resmgr.lib
 kbe/src/libs/server.lib
 kbe/src/libs/ssleay32.lib
@@ -175,6 +180,7 @@ kbe/src/libs/zlib.lib
 kbe/tools/server/guiconsole/guiconsole.iobj
 kbe/tools/server/guiconsole/guiconsole.ipdb
 kbe/tools/server/guiconsole/python37.dll
+kbe/tools/server/guiconsole/python313.dll
 
 
 
