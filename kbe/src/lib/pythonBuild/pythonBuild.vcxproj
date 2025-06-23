@@ -193,8 +193,8 @@ if errorlevel 1 (
 
 
 set LIBS_DIR=%SOLUTION_DIR%lib\python\Lib
-set OUT_LIBS_DIR=%~dp0..\res\scripts\common\Lib
-set OUT_DLLS_DIR=%~dp0..\res\scripts\common\DLLs
+set OUT_LIBS_DIR=$(SolutionDir)..\res\scripts\common\Lib
+set OUT_DLLS_DIR=$(SolutionDir)..\res\scripts\common\DLLs
 
 echo [8] 正在复制 %LIBS_DIR% 到 %OUT_LIBS_DIR%
 
