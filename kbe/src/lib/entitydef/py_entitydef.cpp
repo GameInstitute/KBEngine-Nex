@@ -2150,15 +2150,33 @@ static bool execPython(COMPONENT_TYPE componentType)
 		delete pyStdouterr;
 	}
 
+
+	// 执行清理
+	/*
+	这个函数会：
+	清除解释器内注册的模块、内建对象、字符串缓存等。
+	会访问或清除与当前 PyThreadState 有关的内容（如当前 frame、异常状态、sys dict）。
+
+	所以需要提到PyThreadState_Swap(pCurInterpreter)前，如果此时当前线程仍然绑定的是“主解释器”，
+	你就相当于用 主解释器线程去修改/释放另一个子解释器的内存结构 —— 这是未定义行为，新版 Python 会直接触发断言或崩溃。
+	*/
+	PyInterpreterState_Clear(pNewInterpreter->interp);
+
+
 	if (pNewInterpreter != PyThreadState_Swap(pCurInterpreter))
 	{
 		KBE_ASSERT(false);
 		return false;
 	}
+	// 销毁线程
+	PyThreadState_Delete(pNewInterpreter);
 
-	// 此处不能使用Py_EndInterpreter，会导致Math、Def等模块析构
-	PyInterpreterState_Clear(pNewInterpreter->interp);
-	PyInterpreterState_Delete(pNewInterpreter->interp);
+
+	//// 此处不能使用Py_EndInterpreter，会导致Math、Def等模块析构
+	//PyInterpreterState_Clear(pNewInterpreter->interp);
+	// 新版 Python 更强调“解释器隔离”，直接 Delete 会导致跨线程断言失败。
+	//PyInterpreterState_Delete(pNewInterpreter->interp);
+
 	return otherPartSuccess;
 }
 
