@@ -154,6 +154,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcurl", "lib\dependencies
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zlib", "lib\dependencies\zlib\contrib\vstudio\vc14\zlibstat.vcxproj", "{745DEC58-EBB3-47A9-A9B8-4C6627C01BF8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "python", "python", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pythonBuild", "lib\pythonBuild\pythonBuild.vcxproj", "{78933A1C-A62A-4ECD-91E5-299D2FDF5D33}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win64 = Debug|Win64
@@ -316,6 +320,10 @@ Global
 		{745DEC58-EBB3-47A9-A9B8-4C6627C01BF8}.Debug|Win64.Build.0 = Debug|x64
 		{745DEC58-EBB3-47A9-A9B8-4C6627C01BF8}.Release|Win64.ActiveCfg = Release|x64
 		{745DEC58-EBB3-47A9-A9B8-4C6627C01BF8}.Release|Win64.Build.0 = Release|x64
+		{78933A1C-A62A-4ECD-91E5-299D2FDF5D33}.Debug|Win64.ActiveCfg = Debug|x64
+		{78933A1C-A62A-4ECD-91E5-299D2FDF5D33}.Debug|Win64.Build.0 = Debug|x64
+		{78933A1C-A62A-4ECD-91E5-299D2FDF5D33}.Release|Win64.ActiveCfg = Release|x64
+		{78933A1C-A62A-4ECD-91E5-299D2FDF5D33}.Release|Win64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -363,6 +371,8 @@ Global
 		{13E95053-54B3-497B-9DDB-3430B1C1B6BF} = {8BF90F4F-766B-4B4D-B7F3-BF4189A29F4E}
 		{DA6F56B4-06A4-441D-AD70-AC5A7D51FADB} = {8BF90F4F-766B-4B4D-B7F3-BF4189A29F4E}
 		{745DEC58-EBB3-47A9-A9B8-4C6627C01BF8} = {8BF90F4F-766B-4B4D-B7F3-BF4189A29F4E}
+		{02EA681E-C7D8-13C7-8484-4AC65E1B71E8} = {8BF90F4F-766B-4B4D-B7F3-BF4189A29F4E}
+		{78933A1C-A62A-4ECD-91E5-299D2FDF5D33} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {98BC2259-260D-4CB1-B4A6-FAAA2DC3E91B}
