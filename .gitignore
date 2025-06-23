@@ -39,6 +39,7 @@ Thumbs.db
 /kbe/res/scripts/common/lib-dynload/
 /kbe/res/scripts/common/Lib
 /kbe/src/lib/python
+/kbe/src/lib/pythonBuild/x64
 /kbe/src/lib/dependencies
 
 /kbe/src/lib/python/PCbuild
