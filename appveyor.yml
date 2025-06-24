@@ -13,4 +13,4 @@ environment:
   - TOOLSET: vs2019
 
 build:
-  project: kbe/src/kbengine.sln
+  project: kbe/src/kbengine nex.sln
