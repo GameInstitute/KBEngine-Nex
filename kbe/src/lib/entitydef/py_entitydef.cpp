@@ -1967,6 +1967,58 @@ PyObject* __py_getAppPublish(PyObject* self, PyObject* args)
 	return PyLong_FromLong(g_appPublish);
 }
 
+
+
+
+//-------------------------------------------------------------------------------------
+static void reset_sys_path_after_init(const wchar_t *pathListString)
+{
+    PyObject *sys = PyImport_ImportModule("sys");
+    if (!sys) {
+        PyErr_Print();
+        return;
+    }
+
+    PyObject *new_path_list = PyList_New(0);
+    if (!new_path_list) {
+        PyErr_Print();
+        Py_DECREF(sys);
+        return;
+    }
+
+    // 平台自动选择分隔符
+#if defined(_WIN32)
+    const wchar_t sep = L';';
+#else
+    const wchar_t sep = L':';
+#endif
+
+    // 用 stringstream 分割 pathListString
+    std::wstringstream ss(pathListString);
+    std::wstring item;
+    while (std::getline(ss, item, sep)) {
+        if (!item.empty()) {
+            PyObject *p = PyUnicode_FromWideChar(item.c_str(), -1);
+            if (p) {
+                PyList_Append(new_path_list, p);
+                Py_DECREF(p);
+            } else {
+                PyErr_Print();
+            }
+        }
+    }
+
+    // 设置 sys.path
+    if (PyObject_SetAttrString(sys, "path", new_path_list) != 0) {
+        PyErr_Print();
+    }
+
+    Py_DECREF(new_path_list);
+    Py_DECREF(sys);
+}
+
+
+
 //-------------------------------------------------------------------------------------
 static bool execPython(COMPONENT_TYPE componentType)
 {
@@ -1995,7 +2047,8 @@ static bool execPython(COMPONENT_TYPE componentType)
 	strutil::kbe_replace(pyPaths.second, L";", L":");
 #endif
 
-	PySys_SetPath(pyPaths.second.c_str());
+	// PySys_SetPath(pyPaths.second.c_str());
+	reset_sys_path_after_init(pyPaths.second.c_str());
 
 	PyObject* modulesNew = PySys_GetObject("modules");
 	PyDict_Merge(modulesNew, Script::getSingleton().getSysInitModules(), 0);
@@ -2097,17 +2150,36 @@ static bool execPython(COMPONENT_TYPE componentType)
 		delete pyStdouterr;
 	}
 
+
+	// 执行清理
+	/*
+	这个函数会：
+	清除解释器内注册的模块、内建对象、字符串缓存等。
+	会访问或清除与当前 PyThreadState 有关的内容（如当前 frame、异常状态、sys dict）。
+
+	所以需要提到PyThreadState_Swap(pCurInterpreter)前，如果此时当前线程仍然绑定的是“主解释器”，
+	你就相当于用 主解释器线程去修改/释放另一个子解释器的内存结构 —— 这是未定义行为，新版 Python 会直接触发断言或崩溃。
+	*/
+	PyInterpreterState_Clear(pNewInterpreter->interp);
+
+
 	if (pNewInterpreter != PyThreadState_Swap(pCurInterpreter))
 	{
 		KBE_ASSERT(false);
 		return false;
 	}
+	// 销毁线程
+	PyThreadState_Delete(pNewInterpreter);
 
-	// 此处不能使用Py_EndInterpreter，会导致Math、Def等模块析构
-	PyInterpreterState_Clear(pNewInterpreter->interp);
-	PyInterpreterState_Delete(pNewInterpreter->interp);
+
+	//// 此处不能使用Py_EndInterpreter，会导致Math、Def等模块析构
+	//PyInterpreterState_Clear(pNewInterpreter->interp);
+	// 新版 Python 更强调“解释器隔离”，直接 Delete 会导致跨线程断言失败。
+	//PyInterpreterState_Delete(pNewInterpreter->interp);
+
 	return otherPartSuccess;
 }
+
 
 //-------------------------------------------------------------------------------------
 static bool loadAllScripts()
