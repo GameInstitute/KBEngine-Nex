@@ -185,25 +185,51 @@ bool DBInterfaceMysql::attach(const char* databaseName)
 		}
 
 
-		// 禁用 SSL
-		enum mysql_ssl_mode opt_use_ssl = SSL_MODE_DISABLED;
-		mysql_options(mysql(), MYSQL_OPT_SSL_MODE, &opt_use_ssl);
+		/*模式	含义
+		SSL_MODE_DISABLED	禁用 SSL
+		SSL_MODE_PREFERRED	优先使用 SSL，失败则继续尝试非 SSL
+		SSL_MODE_REQUIRED	强制使用 SSL，失败则连接失败
+		SSL_MODE_VERIFY_CA	要求服务器提供 CA 验证，证书必须由 CA 签发
+		SSL_MODE_VERIFY_IDENTITY	同上，额外验证服务器主机名匹配证书*/
+		
 
 		// 启用“允许向服务器请求 RSA 公钥”
-		bool get_pubkey = 1;
+		const bool get_pubkey = 1;
 		mysql_options(mysql(), MYSQL_OPT_GET_SERVER_PUBLIC_KEY, &get_pubkey);
 
-		//mysql_options(mysql(), MYSQL_ENABLE_CLEARTEXT_PLUGIN, &enable);
 
+		unsigned long clientflag = 0;
+
+		if (db_mysql_ssl_) {
+			const enum mysql_ssl_mode opt_use_ssl = SSL_MODE_REQUIRED;
+			mysql_options(mysql(), MYSQL_OPT_SSL_MODE, &opt_use_ssl);
+			mysql_ssl_set(mysql(),
+				db_mysql_clientKeyPath_.c_str(),
+				db_mysql_clientCertPath_.c_str(),
+				db_mysql_caPath_.c_str(),
+				NULL,
+				NULL);
+
+			clientflag = CLIENT_SSL ;
+
+
+			DEBUG_MSG(fmt::format("DBInterfaceMysql::Enable SSL: sslCert: {}; sslKey:{}; sslCa:{} ...\n", db_mysql_clientKeyPath_, db_mysql_clientCertPath_, db_mysql_caPath_));
+		}
+		else {
+			// 禁用 SSL
+			const enum mysql_ssl_mode opt_use_ssl = SSL_MODE_DISABLED;
+			mysql_options(mysql(), MYSQL_OPT_SSL_MODE, &opt_use_ssl);
+		}
+
+		
 		
 		DEBUG_MSG(fmt::format("DBInterfaceMysql::attach: connect: {}:{} starting...\n", db_ip_, db_port_));
 
 		int ntry = 0;
 
-
 __RECONNECT:
 		if(mysql_real_connect(mysql(), db_ip_, db_username_, 
-    		db_password_, db_name_, db_port_, NULL, 0)) // CLIENT_MULTI_STATEMENTS  
+    		db_password_, db_name_, db_port_, NULL, clientflag)) // CLIENT_MULTI_STATEMENTS  
 		{
 			if(mysql_select_db(mysql(), db_name_) != 0)
 			{
@@ -232,7 +258,7 @@ __RECONNECT:
 				}
 
 				if (mysql_real_connect(mysql(), db_ip_, db_username_,
-					db_password_, NULL, db_port_, NULL, 0)) // CLIENT_MULTI_STATEMENTS  
+					db_password_, NULL, db_port_, NULL, clientflag)) // CLIENT_MULTI_STATEMENTS  
 				{
 					this->createDatabaseIfNotExist();
 					if (mysql_select_db(mysql(), db_name_) != 0)

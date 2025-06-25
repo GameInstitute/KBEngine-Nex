@@ -1040,6 +1040,45 @@ bool ServerConfig::loadConfig(std::string fileName)
 						{
 							missingFields.push_back("auth->encrypt");
 						}
+
+						childnode = xml->enterNode(node, "MySQL");
+						if (childnode)
+						{
+							TiXmlNode* mysqlChildNode = xml->enterNode(childnode, "ssl");
+							if (mysqlChildNode != NULL)
+							{
+								pDBInfo->db_mysql_ssl = xml->getValStr(mysqlChildNode) == "true";
+							}
+							else
+							{
+								missingFields.push_back("auth->MySQL->ssl");
+							}
+
+
+							mysqlChildNode = xml->enterNode(childnode, "sslCert");
+							if (mysqlChildNode != NULL)
+							{
+								pDBInfo->db_mysql_clientCertPath = xml->getValStr(mysqlChildNode);
+							}
+
+							mysqlChildNode = xml->enterNode(childnode, "sslKey");
+							if (mysqlChildNode != NULL)
+							{
+								pDBInfo->db_mysql_clientKeyPath = xml->getValStr(mysqlChildNode);
+							}
+
+							mysqlChildNode = xml->enterNode(childnode, "sslCa");
+							if (mysqlChildNode != NULL)
+							{
+								pDBInfo->db_mysql_caPath = xml->getValStr(mysqlChildNode);
+							}
+							//pDBInfo->db_unicodeString_characterSet = xml->getValStr(childnode);
+						}
+						else
+						{
+							missingFields.push_back("auth->MySQL");
+						}
+
 					}
 					else
 					{

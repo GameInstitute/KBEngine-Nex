@@ -155,6 +155,10 @@ protected:
 	uint16 db_numConnections_;								// 数据库最大连接
 	std::string lastquery_;									// 最后一次查询描述
 	uint16 dbIndex_;										// 对应的数据库接口索引
+	bool db_mysql_ssl_;									// 是否使用mysql ssl连接
+	std::string db_mysql_caPath_; // mysql CA证书路径
+	std::string db_mysql_clientCertPath_; // mysql客户端证书路径
+	std::string db_mysql_clientKeyPath_; // mysql客户端私钥路径
 };
 
 /*

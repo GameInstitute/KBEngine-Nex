@@ -356,7 +356,7 @@
 
 					<MySQL>
 						<!-- 是否启用ssl -->
-						<ssl> true </ssl>
+						<ssl> false </ssl>
 						<!-- ssl证书 -->
 						<sslCert>  </sslCert>
 						<sslKey>  </sslKey>
