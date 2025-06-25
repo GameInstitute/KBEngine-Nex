@@ -155,6 +155,8 @@ bool DBInterfaceMysql::initInterface(DBInterface* pdbi)
 	return true;
 }
 
+
+
 //-------------------------------------------------------------------------------------
 bool DBInterfaceMysql::attach(const char* databaseName)
 {
@@ -187,12 +189,17 @@ bool DBInterfaceMysql::attach(const char* databaseName)
 		enum mysql_ssl_mode opt_use_ssl = SSL_MODE_DISABLED;
 		mysql_options(mysql(), MYSQL_OPT_SSL_MODE, &opt_use_ssl);
 
+		// 启用“允许向服务器请求 RSA 公钥”
+		bool get_pubkey = 1;
+		mysql_options(mysql(), MYSQL_OPT_GET_SERVER_PUBLIC_KEY, &get_pubkey);
 
+		//mysql_options(mysql(), MYSQL_ENABLE_CLEARTEXT_PLUGIN, &enable);
 
 		
 		DEBUG_MSG(fmt::format("DBInterfaceMysql::attach: connect: {}:{} starting...\n", db_ip_, db_port_));
 
 		int ntry = 0;
+
 
 __RECONNECT:
 		if(mysql_real_connect(mysql(), db_ip_, db_username_, 
