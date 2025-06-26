@@ -24,3 +24,4 @@ echo KBE_VENV_PATH = %KBE_VENV_PATH%
 
 start "" "%KBE_BIN_PATH%/kbcmd.exe" --clientsdk=unity --outpath="%~dp0/kbengine_unity3d_plugins"
 start "" "%KBE_BIN_PATH%/kbcmd.exe" --clientsdk=ue4 --outpath="%~dp0/kbengine_ue4_plugins"
+start "" "%KBE_BIN_PATH%/kbcmd.exe" --clientsdk=ue5 --outpath="%~dp0/kbengine_ue5_plugins"
