@@ -167,6 +167,15 @@ DBInterface* DBUtil::createInterface(const std::string& name, bool showinfo)
 	dbinterface->db_numConnections_ = pDBInfo->db_numConnections;
 	kbe_snprintf(dbinterface->db_password_, MAX_BUF * 10, "%s", pDBInfo->db_password);
 
+
+	dbinterface->db_mysql_ssl_ = pDBInfo->db_mysql_ssl;
+	if (dbinterface->db_mysql_ssl_)
+	{
+		dbinterface->db_mysql_caPath_ = pDBInfo->db_mysql_caPath;
+		dbinterface->db_mysql_clientCertPath_ = pDBInfo->db_mysql_clientCertPath;
+		dbinterface->db_mysql_clientKeyPath_ = pDBInfo->db_mysql_clientKeyPath;
+	}
+
 	if (!dbinterface->attach(pDBInfo->db_name))
 	{
 		ERROR_MSG(fmt::format("DBUtil::createInterface: attach to database failed!\n\tdbinterface={0:p}\n\targs={1}\n",

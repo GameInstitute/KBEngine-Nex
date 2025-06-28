@@ -111,6 +111,10 @@ struct DBInterfaceInfo
 	char db_autoIncrementInit[MAX_BUF];							// 自增索引起始
 	std::string db_unicodeString_characterSet;				// 设置数据库字符集
 	std::string db_unicodeString_collation;
+	bool db_mysql_ssl;									// 是否使用mysql ssl连接
+	std::string db_mysql_caPath; // mysql CA证书路径
+	std::string db_mysql_clientCertPath; // mysql客户端证书路径
+	std::string db_mysql_clientKeyPath; // mysql客户端私钥路径
 };
 
 // 引擎组件信息结构体
