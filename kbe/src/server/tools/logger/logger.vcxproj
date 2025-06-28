@@ -208,7 +208,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\lib\dependencies\vsopenssl\include\openssl\applink.c" />
-    <ClCompile Include="..\..\..\lib\python\Modules\getbuildinfo.c" />
     <ClCompile Include="logwatcher.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="logger.cpp" />

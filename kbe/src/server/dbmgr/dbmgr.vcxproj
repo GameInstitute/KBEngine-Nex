@@ -216,7 +216,6 @@
     <ClCompile Include="dbmgr.cpp" />
     <ClCompile Include="dbmgr_interface.cpp" />
     <ClCompile Include="dbtasks.cpp" />
-    <ClCompile Include="..\..\lib\python\Modules\getbuildinfo.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="profile.cpp" />
     <ClCompile Include="sync_app_datas_handler.cpp" />

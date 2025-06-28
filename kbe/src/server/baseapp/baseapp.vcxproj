@@ -226,7 +226,6 @@
     <ClCompile Include="data_downloads.cpp" />
     <ClCompile Include="entity_autoloader.cpp" />
     <ClCompile Include="forward_message_over_handler.cpp" />
-    <ClCompile Include="..\..\lib\python\Modules\getbuildinfo.c" />
     <ClCompile Include="initprogress_handler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="profile.cpp" />

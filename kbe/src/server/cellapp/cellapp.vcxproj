@@ -230,7 +230,6 @@
     <ClCompile Include="entity_remotemethod.cpp" />
     <ClCompile Include="entityref.cpp" />
     <ClCompile Include="forward_message_over_handler.cpp" />
-    <ClCompile Include="..\..\lib\python\Modules\getbuildinfo.c" />
     <ClCompile Include="ghost_manager.cpp" />
     <ClCompile Include="history_event.cpp" />
     <ClCompile Include="initprogress_handler.cpp" />
