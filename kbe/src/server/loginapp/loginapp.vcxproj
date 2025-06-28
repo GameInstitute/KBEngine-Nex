@@ -212,7 +212,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\lib\dependencies\vsopenssl\include\openssl\applink.c" />
-    <ClCompile Include="..\..\lib\python\Modules\getbuildinfo.c" />
     <ClCompile Include="clientsdk_downloader.cpp" />
     <ClCompile Include="http_cb_handler.cpp" />
     <ClCompile Include="loginapp.cpp" />

@@ -292,7 +292,6 @@
     <ClCompile Include="ConnectRemoteMachineWindow.cpp" />
     <ClCompile Include="DebugWindow.cpp" />
     <ClCompile Include="EditSendbuffer.cpp" />
-    <ClCompile Include="..\..\..\lib\python\Modules\getbuildinfo.c" />
     <ClCompile Include="GraphsWindow.cpp" />
     <ClCompile Include="guiconsole.cpp" />
     <ClCompile Include="guiconsoleDlg.cpp" />

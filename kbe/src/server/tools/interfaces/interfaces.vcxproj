@@ -208,7 +208,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\lib\dependencies\vsopenssl\include\openssl\applink.c" />
-    <ClCompile Include="..\..\..\lib\python\Modules\getbuildinfo.c" />
     <ClCompile Include="interfaces_tasks.cpp" />
     <ClCompile Include="interfaces.cpp" />
     <ClCompile Include="interfaces_interface.cpp" />

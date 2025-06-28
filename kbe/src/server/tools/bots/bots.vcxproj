@@ -214,7 +214,6 @@
     <ClCompile Include="bots_interface.cpp" />
     <ClCompile Include="clientobject.cpp" />
     <ClCompile Include="create_and_login_handler.cpp" />
-    <ClCompile Include="..\..\..\lib\python\Modules\getbuildinfo.c" />
     <ClCompile Include="kcp_packet_receiver_ex.cpp" />
     <ClCompile Include="kcp_packet_sender_ex.cpp" />
     <ClCompile Include="main.cpp" />
