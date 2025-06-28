@@ -1,90 +1,81 @@
-KBEngine
-========
-
-[![Build Status](https://app.travis-ci.com/KBEngineLab/KBEngine-Nex.svg?token=M3r2FYhm8oaqqg7DgR5z)](https://app.travis-ci.com/KBEngineLab/KBEngine-Nex)
-[![Build status](https://ci.appveyor.com/api/projects/status/aij7ox4twu53v3v0/branch/master?svg=true)](https://ci.appveyor.com/project/KBEngineLab/kbengine-nex/branch/master)
 
 
-## Homepage
-
-	https://www.kbelab.com/
-
-
-## Releases
-
-	Sources		: https://github.com/KBEngineLab/KBEngine-Nex/releases/latest
+<div align="center">
+<img alt="SwanLab" src="https://github.com/KBEngineLab/KBEngineNexMaterials/blob/main/images/kbenexlogo.png?raw=true" width="80" height="80" style="margin-top:20px;">
 
 
-## Demo sources
+<h1>KBEngine Nex</h1>
 
-	Unity3d		: https://github.com/kbengine/kbengine_unity3d_demo/releases/latest
-	Unity3d		: https://github.com/kbengine/kbengine_unity3d_warring/releases/latest
-	UE4		: https://github.com/kbengine/kbengine_ue4_demo/releases/latest
-	Ogre		: https://github.com/kbengine/kbengine_ogre_demo/releases/latest
-	Cocos2d_js	: https://github.com/kbengine/kbengine_cocos2d_js_demo/releases/latest
-	Godot Engine	: https://github.com/krogank9/kbe_godot_demo/releases/latest
+一款开源的游戏服务端引擎，客户端通过简单的约定协议就能与服务端通讯
+
+使用KBEngine插件能够快速与(Unity3D, UE, Cocos等等)技术结合形成一个完整的客户端
 
 
-## Docs
-
-	Docs		: https://kbengine.github.io/docs/
-	API		: https://github.com/kbengine/kbengine/tree/master/docs
+<a href="https://www.kbelab.com/">🎨 官网</a> · <a href="https://api.kbelab.com/">🍀 文档</a> · <a href="https://github.com/KBEngineLab/KBEngine-Nex/issues">报告问题</a> · <a href="https://github.com/KBEngineLab/KBEngine-Nex/discussions/categories/ideas">建议反馈</a> · <a href="UPDATE.md">更新日志</a>
 
 
-## Support
+[![][qq1-shield]][qq1-link]
 
-	Email		: kbesrv?gmail.com
-	QQ		: 3603661
-	BBS		: http://bbs.kbengine.org
-	Maillist	: https://groups.google.com/d/forum/kbengine_maillist
+[![][build-status-shield]][build-status-link] [![][release-shield]][release-link] [![][dockerhub-shield]][dockerhub-link] [![][last-commit-shield]][last-commit-shield-link] [![][github-issues-shield]][github-issues-shield-link] [![][github-stars-shield]][github-stars-link]
 
-
-## Stresstest
-
-	https://www.youtube.com/watch?v=sWtk3CfxyGY
-	http://v.youku.com/v_show/id_XMjgyMjM0MTYwNA==.html?spm=a2h3j.8428770.3416059.1
+</div>
 
 
-## What is KBEngine?
+## 什么是KBEngine
 
-	An open source MMOG server engine. 
-	Just use Python scripting to be able to complete any game logic simply and efficiently (supports hotfixing).
-	Various KBEngine plugins can be quickly combined with (Unity3D, OGRE, Cocos2d-x, HTML5, etc.) technology to 
-	form a complete game client.
+一款开源的游戏服务端引擎，客户端通过简单的约定协议就能与服务端通讯， 使用KBEngine插件能够快速与(Unity3D, UE, Cocos等等)技术结合形成一个完整的客户端。 
 
-	The engine is written in C++, and saves developers from having to re-implement common server-side 
-	technology, allowing them to concentrate on game logic development, to quickly create a variety of games.
+服务端底层框架使用C++编写，游戏逻辑层使用Python(支持热更新)，开发者无需重复的实现一些游戏服务端通用的底层技术， 将精力真正集中到游戏开发层面上来，快速的打造各种网络游戏。
 
-	(Because it is often asked what the upper limit of the load is that KBEngine can handle, the underlying 
-	architecture has been designed as a multi-process distributed dynamic load balancing solution. In theory, 
-	by continuously expanding the hardware, the upper limit of the load can also be continuously increased. 
-	The upper limit of the capacity of a single machine depends on the complexity of the game logic itself.)
+## 特性
 
-
-## Create a new game asset library
-
-	Execute:
-		new_assets.bat
-
-	Output:
-		server_assets
+- **多人同时在线**：支持持大量的玩家同时在线实时游戏的交互。 具体承载量需要根据游戏的类型和复杂度以及硬件的性能来决定。
+- **自动备份**：支持定时自动备份数据到数据库，同时也提供了API让用户主动调用一次写库功能。
+- **跨平台**：Linux支持(x86/x64): Ubuntu, Debain, Centos, Redhat。 支持所有版本的Windows系统，但目前仅用于调试和游戏开发环境。
+- **完善的客户端SDK**：客户端开发者所要做的就是接收事件数据，然后渲染。 SDK支持UE、Unity、Cocos等等。
+- **配置简单**：只需要修改kbengine.xml 与 kbengine_defaults.xml 配置文件。
+- **动态负载平衡**：为了更有效地利用有限的硬件，动态负载均衡技术在高负载时引擎仍然能够很好的工作。
+- **强大的配套工具**：在线调试、查看服务端状态、启动与关闭。 在线升级、策划数据导出、等等。
+- **快速开发游戏**：只需要使用Python就可以快速的进行设计游戏。 底层安全可靠，保证效率。
 
 
-## 中文
+## Demo
 
-[官网](https://kbengine.github.io/cn/)，[论坛](https://github.com/kbengine/kbengine/discussions)，QQ交流群：461368412、16535321、716679842
+	Unity		: https://github.com/KBEngineLab/demo_kbengine_unity3d_default
+	UE5		: https://github.com/KBEngineLab/demo_kbengine_ue5_default
+	UE4		: https://github.com/kbengine/kbengine_ue4_demo
+	
+<!-- Cocos2d_js	: https://github.com/kbengine/kbengine_cocos2d_js_demo -->
+<!-- Godot Engine	: https://github.com/krogank9/kbe_godot_demo -->
 
 
-## 什么是KBEngine?
 
-	一款开源的MMOG游戏服务端引擎，
-	仅Python脚本即可简单高效的完成任何游戏逻辑(支持热更新)，
-	使用配套客户端插件能够快速与（Unity3D、UE4、OGRE、HTML5、等等）结合形成一个完整的客户端。
 
-	引擎使用C++编写，开发者无需重复的实现游戏服务端通用的底层技术，
-	将精力真正集中到游戏开发层面上来，稳定可靠并且快速的打造各种网络游戏。
 
-	(经常被问到承载上限，KBEngine底层架构被设计为多进程分布式动态负载均衡方案，
-	理论上只需要不断扩展硬件就能够不断增加承载上限，单台机器的承载上限取决于游戏逻辑本身的复杂度。)
+[build-status-shield]: https://ci.appveyor.com/api/projects/status/aij7ox4twu53v3v0/branch/master?svg=true
+[build-status-link]: https://ci.appveyor.com/project/KBEngineLab/kbengine-nex/branch/master
+
+[release-shield]: https://img.shields.io/github/v/release/KBEngineLab/KBEngine-Nex?color=3eaf7c&labelColor=black&logo=github&style=flat-square
+[release-link]: https://github.com/KBEngineLab/KBEngine-Nex/releases
+
+
+[last-commit-shield]: https://img.shields.io/github/last-commit/KBEngineLab/KBEngine-Nex?color=c4f042&labelColor=black&style=flat-square
+[last-commit-shield-link]: https://github.com/KBEngineLab/KBEngine-Nex/commits/master/
+
+
+[dockerhub-shield]: https://img.shields.io/docker/v/kbenginelab/kbengine-nex?color=369eff&label=docker&labelColor=black&logoColor=white&style=flat-square
+[dockerhub-link]: https://hub.docker.com/r/kbenginelab/kbengine-nex/tags
+
+
+[github-stars-shield]: https://img.shields.io/github/stars/KBEngineLab/KBEngine-Nex?labelColor&style=flat-square&color=ffcb47
+[github-stars-link]: https://github.com/KBEngineLab/KBEngine-Nex
+
+
+[github-issues-shield]: https://img.shields.io/github/issues/KBEngineLab/KBEngine-Nex?labelColor=black&style=flat-square&color=ff80eb
+[github-issues-shield-link]: https://github.com/KBEngineLab/KBEngine-Nex/issues
+
+
+[qq1-shield]: https://img.shields.io/badge/QQ交流①群-150506969-3eaf7c
+[qq1-link]: https://qm.qq.com/q/IuzGOBQqK4
 
 
