@@ -189,8 +189,8 @@ void ClientSDKUE5::onCreateTypeFileName()
 	sourcefileName_ = "";
 	headerfileName_ = "KBETypes.h";
 
-	currHeaderPath_ = basepath_ + "Source/KBEnginePlugins/Engine/";
-	currSourcePath_ = basepath_ + "Source/KBEnginePlugins/Engine/";
+	currHeaderPath_ = basepath_ + "Source/KBEnginePlugins/Public/Engine/";
+	currSourcePath_ = basepath_ + "Source/KBEnginePlugins/Public/Engine/";
 
 	changeContextToHeader();
 }
@@ -201,8 +201,8 @@ void ClientSDKUE5::onCreateEntityModuleFileName(const std::string& moduleName)
 	sourcefileName_ = moduleName + moduleSuffix + ".cpp";
 	headerfileName_ = moduleName + moduleSuffix + ".h";
 
-	currHeaderPath_ = basepath_ + "Source/KBEnginePlugins/Engine/";
-	currSourcePath_ = basepath_ + "Source/KBEnginePlugins/Engine/";
+	currHeaderPath_ = basepath_ + "Source/KBEnginePlugins/Public/Engine/";
+	currSourcePath_ = basepath_ + "Source/KBEnginePlugins/Public/Engine/";
 
 	changeContextToHeader();
 }
@@ -213,8 +213,8 @@ void ClientSDKUE5::onCreateServerErrorDescrsModuleFileName()
 	sourcefileName_ = "";
 	headerfileName_ = "ServerErrorDescrs.h";
 
-	currHeaderPath_ = basepath_ + "Source/KBEnginePlugins/Engine/";
-	currSourcePath_ = basepath_ + "Source/KBEnginePlugins/Engine/";
+	currHeaderPath_ = basepath_ + "Source/KBEnginePlugins/Public/Engine/";
+	currSourcePath_ = basepath_ + "Source/KBEnginePlugins/Public/Engine/";
 
 	changeContextToHeader();
 }
@@ -225,8 +225,8 @@ void ClientSDKUE5::onCreateEngineMessagesModuleFileName()
 	sourcefileName_ = "Messages.cpp";
 	headerfileName_ = "Messages.h";
 
-	currHeaderPath_ = basepath_ + "Source/KBEnginePlugins/Engine/";
-	currSourcePath_ = basepath_ + "Source/KBEnginePlugins/Engine/";
+	currHeaderPath_ = basepath_ + "Source/KBEnginePlugins/Public/Engine/";
+	currSourcePath_ = basepath_ + "Source/KBEnginePlugins/Public/Engine/";
 
 	changeContextToHeader();
 }
@@ -237,8 +237,8 @@ void ClientSDKUE5::onCreateDefsCustomTypesModuleFileName()
 	sourcefileName_ = "CustomDataTypes.cpp";
 	headerfileName_ = "CustomDataTypes.h";
 
-	currHeaderPath_ = basepath_ + "Source/KBEnginePlugins/Engine/";
-	currSourcePath_ = basepath_ + "Source/KBEnginePlugins/Engine/";
+	currHeaderPath_ = basepath_ + "Source/KBEnginePlugins/Public/Engine/";
+	currSourcePath_ = basepath_ + "Source/KBEnginePlugins/Public/Engine/";
 
 	changeContextToHeader();
 }
@@ -249,8 +249,8 @@ void ClientSDKUE5::onCreateEntityDefsModuleFileName()
 	sourcefileName_ = "EntityDef.cpp";
 	headerfileName_ = "EntityDef.h";
 
-	currHeaderPath_ = basepath_ + "Source/KBEnginePlugins/Engine/";
-	currSourcePath_ = basepath_ + "Source/KBEnginePlugins/Engine/";
+	currHeaderPath_ = basepath_ + "Source/KBEnginePlugins/Public/Engine/";
+	currSourcePath_ = basepath_ + "Source/KBEnginePlugins/Public/Engine/";
 
 	changeContextToHeader();
 }
@@ -261,8 +261,8 @@ void ClientSDKUE5::onEntityCallModuleFileName(const std::string& moduleName)
 	sourcefileName_ = std::string("EntityCall") + moduleName + moduleSuffix + ".cpp";
 	headerfileName_ = std::string("EntityCall") + moduleName + moduleSuffix + ".h";
 
-	currHeaderPath_ = basepath_ + "Source/KBEnginePlugins/Engine/";
-	currSourcePath_ = basepath_ + "Source/KBEnginePlugins/Engine/";
+	currHeaderPath_ = basepath_ + "Source/KBEnginePlugins/Public/Engine/";
+	currSourcePath_ = basepath_ + "Source/KBEnginePlugins/Public/Engine/";
 
 	changeContextToHeader();
 }

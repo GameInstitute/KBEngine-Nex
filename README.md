@@ -11,7 +11,7 @@
 使用KBEngine插件能够快速与(Unity3D, UE, Cocos等等)技术结合形成一个完整的客户端
 
 
-<a href="https://www.kbelab.com/">🎨 官网</a> · <a href="https://api.kbelab.com/">🍀 文档</a> · <a href="https://github.com/KBEngineLab/KBEngine-Nex/issues">报告问题</a> · <a href="https://github.com/KBEngineLab/KBEngine-Nex/discussions/categories/ideas">建议反馈</a> · <a href="UPDATE.md">更新日志</a>
+<a href="https://www.kbelab.com/">🎨 官网</a> · <a href="https://api.kbelab.com/">🍀 文档</a> · <a href="https://github.com/KBEngineLab/KBEngine-Nex/issues">报告问题</a> · <a href="https://github.com/KBEngineLab/KBEngine-Nex/discussions/categories/ideas">建议反馈</a> · <a href="UPDATE.md">更新日志</a> · <a href="https://github.com/kbengine/kbengine">KBEngine</a>
 
 
 [![][qq1-shield]][qq1-link]
@@ -21,11 +21,25 @@
 </div>
 
 
-## 什么是KBEngine
+## 什么是 KBEngine
+
+https://github.com/kbengine/kbengine
 
 一款开源的游戏服务端引擎，客户端通过简单的约定协议就能与服务端通讯， 使用KBEngine插件能够快速与(Unity3D, UE, Cocos等等)技术结合形成一个完整的客户端。 
 
 服务端底层框架使用C++编写，游戏逻辑层使用Python(支持热更新)，开发者无需重复的实现一些游戏服务端通用的底层技术， 将精力真正集中到游戏开发层面上来，快速的打造各种网络游戏。
+
+
+
+
+## 什么是 KBEngine Nex
+
+KBEngine Nex 是在KBEngine 2.5.12 的基础上社区继续维护的版本
+- Pycharm IDE 插件支持
+- UE5 SDK支持
+- Cocos SDK支持
+- Python 版本升级（ 3.7 -> 3.13 ）
+- 支持 MacOS 开发环境
 
 ## 特性
 
