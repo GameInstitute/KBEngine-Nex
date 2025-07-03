@@ -660,6 +660,7 @@ bool Baseapp::initializeEnd()
 	loopCheckTimerHandle_ = this->dispatcher().addTimer(1000000, this,
 							reinterpret_cast<void *>(TIMEOUT_CHECK_STATUS));
 
+	// 添加一个timer用于python解释器保活
 	PyObject* dispatcherMod = PyImport_ImportModule("async_dispatcher");
 	PyObject* submitFunc = PyObject_GetAttrString(dispatcherMod, "onAsyncTimer");
 

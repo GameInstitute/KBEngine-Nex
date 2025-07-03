@@ -3,6 +3,7 @@
 #include "method.h"
 #include "entitydef.h"
 #include "network/bundle.h"
+#include "server/asyncio_helper.h"
 
 #ifndef CODE_INLINE
 #include "method.inl"
@@ -239,7 +240,7 @@ PyObject* MethodDescription::call(PyObject* func, PyObject* args)
 	}
 
 	if (pyResult) {
-		int isAwaitable = PyObject_HasAttrString(pyResult, "__await__");
+		/*int isAwaitable = PyObject_HasAttrString(pyResult, "__await__");
 		if (isAwaitable > 0) {
 			PyObject* dispatcherMod = PyImport_ImportModule("async_dispatcher");
 			PyObject* submitFunc = PyObject_GetAttrString(dispatcherMod, "submit_coroutine");
@@ -250,9 +251,10 @@ PyObject* MethodDescription::call(PyObject* func, PyObject* args)
 			Py_XDECREF(fut);
 			Py_XDECREF(dispatcherMod);
 			Py_XDECREF(submitFunc);
-		}
+		}*/
 
-		
+		AsyncioHelper::submitCoroutine(pyResult);
+
 	}
 	
 	

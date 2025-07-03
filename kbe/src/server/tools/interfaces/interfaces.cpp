@@ -20,6 +20,8 @@
 #include "loginapp/loginapp_interface.h"
 #include "dbmgr/dbmgr_interface.h"	
 
+#include "server/asyncio_helper.h"
+
 namespace KBEngine{
 	
 ServerConfig g_serverConfig;
@@ -133,6 +135,51 @@ bool Interfaces::inInitialize()
 	return true;
 }
 
+
+//-------------------------------------------------------------------------------------	
+
+/**
+内部定时器处理类
+*/
+class AsyncTimerHandler : public TimerHandler
+{
+public:
+	AsyncTimerHandler(ScriptTimers* scriptTimers, PyObject* callback) :
+		pyCallback_(callback),
+		asyncTimerTimers_(scriptTimers)
+	{
+		Py_INCREF(pyCallback_);
+	}
+
+	~AsyncTimerHandler()
+	{
+		Py_DECREF(pyCallback_);
+	}
+
+private:
+	virtual void handleTimeout(TimerHandle handle, void* pUser)
+	{
+		int id = ScriptTimersUtil::getIDForHandle(asyncTimerTimers_, handle);
+
+		PyObject* pyRet = PyObject_CallFunction(pyCallback_, "i", id);
+		if (pyRet == NULL)
+		{
+			SCRIPT_ERROR_CHECK();
+			return;
+		}
+		return;
+	}
+
+	virtual void onRelease(TimerHandle handle, void* /*pUser*/)
+	{
+		asyncTimerTimers_->releaseTimer(handle);
+		delete this;
+	}
+
+	PyObject* pyCallback_;
+	ScriptTimers* asyncTimerTimers_;
+};
+
 //-------------------------------------------------------------------------------------
 bool Interfaces::initializeEnd()
 {
@@ -140,6 +187,15 @@ bool Interfaces::initializeEnd()
 
 	mainProcessTimer_ = this->dispatcher().addTimer(1000000 / g_kbeSrvConfig.gameUpdateHertz(), this,
 							reinterpret_cast<void *>(TIMEOUT_TICK));
+
+
+	// 添加一个timer用于python解释器保活
+	PyObject* dispatcherMod = PyImport_ImportModule("async_dispatcher");
+	PyObject* submitFunc = PyObject_GetAttrString(dispatcherMod, "onAsyncTimer");
+
+	ScriptTimers* pTimers = &asyncTimerTimers_;
+	AsyncTimerHandler* handler = new AsyncTimerHandler(pTimers, submitFunc);
+	ScriptTimersUtil::addTimer(&pTimers, 0.1f, 0.1f, 0, handler);
 
 	// 不做频道超时检查
 	CLOSE_CHANNEL_INACTIVITIY_DETECTION();
@@ -154,8 +210,10 @@ bool Interfaces::initializeEnd()
 										const_cast<char*>("onInterfaceAppReady"), 
 										const_cast<char*>(""));
 
-	if(pyResult != NULL)
+	if (pyResult != NULL) {
+		AsyncioHelper::submitCoroutine(pyResult);
 		Py_DECREF(pyResult);
+	}
 	else
 		SCRIPT_ERROR_CHECK();
 
@@ -529,8 +587,10 @@ void Interfaces::reqCreateAccount(Network::Channel* pChannel, KBEngine::MemorySt
 										password.c_str(),
 										datas.c_str(), datas.length());
 
-	if(pyResult != NULL)
+	if (pyResult != NULL) {
+		AsyncioHelper::submitCoroutine(pyResult);
 		Py_DECREF(pyResult);
+	}
 	else
 		SCRIPT_ERROR_CHECK();
 }
@@ -641,8 +701,10 @@ void Interfaces::onAccountLogin(Network::Channel* pChannel, KBEngine::MemoryStre
 										password.c_str(), 
 										datas.c_str(), datas.length());
 
-	if(pyResult != NULL)
+	if (pyResult != NULL) {
+		AsyncioHelper::submitCoroutine(pyResult);
 		Py_DECREF(pyResult);
+	}
 	else
 		SCRIPT_ERROR_CHECK();
 }
@@ -756,8 +818,10 @@ void Interfaces::charge(Network::Channel* pChannel, KBEngine::MemoryStream& s)
 										pOrdersCharge->dbid, 
 										pOrdersCharge->postDatas.c_str(), pOrdersCharge->postDatas.length());
 
-	if(pyResult != NULL)
+	if (pyResult != NULL) {
+		AsyncioHelper::submitCoroutine(pyResult);
 		Py_DECREF(pyResult);
+	}
 	else
 		SCRIPT_ERROR_CHECK();
 }
