@@ -22,6 +22,7 @@ SRCS =				\
 	telnet_handler		\
 	telnet_server		\
 	python_app		\
+	asyncio_helper		\
 	id_component_querier
 
 ifndef KBE_ROOT

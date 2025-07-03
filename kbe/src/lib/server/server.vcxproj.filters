@@ -81,6 +81,9 @@
     <ClCompile Include="id_component_querier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="asyncio_helper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="callbackmgr.h">
@@ -156,6 +159,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="id_component_querier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="asyncio_helper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
