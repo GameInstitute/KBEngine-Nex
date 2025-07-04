@@ -132,10 +132,10 @@ void Loginapp::onChannelDeregister(Network::Channel * pChannel)
                                                     const_cast<char*>("s"), 
                                                     extra.c_str());
 
-                if(pyResult != NULL)
-                {
-                    Py_DECREF(pyResult);
-                }
+                if(pyResult != NULL) {
+					AsyncioHelper::submitCoroutine(pyResult);
+					Py_DECREF(pyResult);
+				}
                 else
                 {
                     SCRIPT_ERROR_CHECK();
@@ -175,8 +175,10 @@ bool Loginapp::initializeEnd()
 										const_cast<char*>("onLoginAppReady"), 
 										const_cast<char*>(""));
 
-	if(pyResult != NULL)
+	if(pyResult != NULL) {
+		AsyncioHelper::submitCoroutine(pyResult);
 		Py_DECREF(pyResult);
+	}
 	else
 		SCRIPT_ERROR_CHECK();
 	
@@ -594,8 +596,8 @@ void Loginapp::onReqCreateAccountResult(Network::Channel* pChannel, MemoryStream
 										failedcode,
 										retdatas.c_str(), retdatas.length());
 
-	if(pyResult != NULL)
-	{
+	if(pyResult != NULL) {
+		AsyncioHelper::submitCoroutine(pyResult);
 		Py_DECREF(pyResult);
 	}
 	else
@@ -1236,8 +1238,8 @@ void Loginapp::onLoginAccountQueryResultFromDbmgr(Network::Channel* pChannel, Me
 										retcode,
 										datas.c_str(), datas.length());
 
-	if(pyResult != NULL)
-	{
+	if(pyResult != NULL) {
+		AsyncioHelper::submitCoroutine(pyResult);
 		Py_DECREF(pyResult);
 	}
 	else

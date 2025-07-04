@@ -187,8 +187,10 @@ bool InitProgressHandler::process()
 											const_cast<char*>("O"), 
 											PyBool_FromLong((g_componentGroupOrder == 1) ? 1 : 0));
 
-		if(pyResult != NULL)
+		if(pyResult != NULL) {
+			AsyncioHelper::submitCoroutine(pyResult);
 			Py_DECREF(pyResult);
+		}
 		else
 			SCRIPT_ERROR_CHECK();
 

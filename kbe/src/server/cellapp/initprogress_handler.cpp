@@ -139,8 +139,10 @@ bool InitProgressHandler::process()
 			const_cast<char*>("i"),
 			0);
 
-		if (pyResult != NULL)
+		if (pyResult != NULL) {
+			AsyncioHelper::submitCoroutine(pyResult);
 			Py_DECREF(pyResult);
+		}
 		else
 			SCRIPT_ERROR_CHECK();
 

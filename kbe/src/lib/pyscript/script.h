@@ -21,6 +21,7 @@ namespace KBEngine{ namespace script{
 					L"../../res/scripts/common/lib-dynload;"		\
 					L"../../res/scripts/common/DLLs;"				\
 					L"../../res/scripts/common/Lib;"				\
+					L"../../res/scripts/common/PyScript;"				\
 					L"../../res/scripts/common/Lib/site-packages;"	\
 					L"../../res/scripts/common/Lib/dist-packages"
 
@@ -31,6 +32,7 @@ namespace KBEngine{ namespace script{
 					L"../../res/scripts/common/lib-dynload;"		\
 					L"../../res/scripts/common/DLLs;"				\
 					L"../../res/scripts/common/Lib;"				\
+					L"../../res/scripts/common/PyScript;"				\
 					L"../../res/scripts/common/Lib/site-packages;"	\
 					L"../../res/scripts/common/Lib/dist-packages"	
 

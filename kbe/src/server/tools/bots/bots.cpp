@@ -104,8 +104,8 @@ bool Bots::initializeEnd()
 										const_cast<char*>("i"), 
 										0);
 
-	if(pyResult != NULL)
-	{
+	if(pyResult != NULL) {
+		AsyncioHelper::submitCoroutine(pyResult);
 		Py_DECREF(pyResult);
 	}
 	else
@@ -125,8 +125,8 @@ void Bots::finalise()
 										const_cast<char*>("onFinish"),
 										const_cast<char*>(""));
 
-	if(pyResult != NULL)
-	{
+	if(pyResult != NULL) {
+		AsyncioHelper::submitCoroutine(pyResult);
 		Py_DECREF(pyResult);
 	}
 	else

@@ -38,6 +38,7 @@ Thumbs.db
 # -------------[ make files ]------------------------ #
 /kbe/res/scripts/common/lib-dynload/
 /kbe/res/scripts/common/Lib
+/kbe/res/scripts/common/DLLs
 /kbe/src/lib/python
 /kbe/src/lib/pythonBuild/x64
 /kbe/src/lib/dependencies

@@ -259,6 +259,8 @@ public:
 	static PyObject* __py_getFlags(PyObject* self, PyObject* args);
 
 protected:
+	// python½âÊÍÆ÷±£»î
+	ScriptTimers											asyncTimerTimers_;
 	// cellAppData
 	GlobalDataClient*					pCellAppData_;
 

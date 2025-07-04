@@ -5,6 +5,7 @@
 
 #include "common/common.h"
 #include "helper/debug_helper.h"
+#include "server/asyncio_helper.h"
 
 namespace KBEngine{ namespace script{
 
@@ -667,6 +668,7 @@ namespace KBEngine{ namespace script{
 			PyObject* pyResult = PyObject_CallMethod((OBJ), (METHOT_NAME), 								\
 																const_cast<char*>(""));					\
 			if(pyResult != NULL) {																		\
+				AsyncioHelper::submitCoroutine(pyResult);												\
 				Py_DECREF(pyResult);																	\
 			}																							\
 			else																						\
@@ -704,6 +706,7 @@ namespace KBEngine{ namespace script{
 												(ARG1)													\
 													);													\
 			if(pyResult != NULL) {																		\
+				AsyncioHelper::submitCoroutine(pyResult);												\
 				Py_DECREF(pyResult);																	\
 			}																							\
 			else																						\
@@ -742,6 +745,7 @@ namespace KBEngine{ namespace script{
 												(ARG2)													\
 													);													\
 			if(pyResult != NULL) {																		\
+				AsyncioHelper::submitCoroutine(pyResult);												\
 				Py_DECREF(pyResult);																	\
 			}																							\
 			else																						\
@@ -781,6 +785,7 @@ namespace KBEngine{ namespace script{
 												(ARG3)													\
 													);													\
 			if(pyResult != NULL) {																		\
+				AsyncioHelper::submitCoroutine(pyResult);												\
 				Py_DECREF(pyResult);																	\
 			}																							\
 			else																						\
@@ -821,6 +826,7 @@ namespace KBEngine{ namespace script{
 												(ARG4)													\
 													);													\
 			if(pyResult != NULL) {																		\
+				AsyncioHelper::submitCoroutine(pyResult);												\
 				Py_DECREF(pyResult);																	\
 			}																							\
 			else																						\
@@ -862,6 +868,7 @@ namespace KBEngine{ namespace script{
 												(ARG5)													\
 													);													\
 			if(pyResult != NULL) {																		\
+				AsyncioHelper::submitCoroutine(pyResult);												\
 				Py_DECREF(pyResult);																	\
 			}																							\
 			else																						\

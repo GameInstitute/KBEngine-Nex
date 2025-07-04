@@ -753,8 +753,8 @@ bool Witness::update()
 			const_cast<char*>("onUpdateBegin"),
 			const_cast<char*>(""));
 
-		if (pyResult != NULL)
-		{
+		if (pyResult != NULL) {
+			AsyncioHelper::submitCoroutine(pyResult);
 			Py_DECREF(pyResult);
 		}
 		else
@@ -899,8 +899,8 @@ bool Witness::update()
 			const_cast<char*>("onUpdateEnd"),
 			const_cast<char*>(""));
 
-		if (pyResult != NULL)
-		{
+		if (pyResult != NULL) {
+			AsyncioHelper::submitCoroutine(pyResult);
 			Py_DECREF(pyResult);
 		}
 		else

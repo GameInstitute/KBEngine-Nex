@@ -14,17 +14,17 @@ public class KBEnginePlugins : ModuleRules
         string[] PublicModules = new string[] { "Core", "CoreUObject", "Engine"};
         List<string> PublicModulesList = new List<string>(PublicModules);
 
-        PublicIncludePaths.AddRange(
-			new string[] {
-				// ... add public include paths required here ...
-			}
-			);
+        // PublicIncludePaths.AddRange(
+		// 	new string[] {
+		// 		// ... add public include paths required here ...
+		// 	}
+		// 	);
 				
-		PrivateIncludePaths.AddRange(
-			new string[] {
-				// ... add other private include paths required here ...
-			}
-			);
+		// PrivateIncludePaths.AddRange(
+		// 	new string[] {
+		// 		// ... add other private include paths required here ...
+		// 	}
+		// 	);
 
         if (Target.bBuildEditor)
         {
@@ -35,12 +35,12 @@ public class KBEnginePlugins : ModuleRules
         PublicDependencyModuleNames.AddRange(PublicModules);
 
         PrivateDependencyModuleNames.AddRange(PrivateModules);
-        PublicIncludePaths.Add(ModuleDirectory);
-        DynamicallyLoadedModuleNames.AddRange(
-            new string[]
-            {
-				// ... add any modules that your module loads dynamically here ...
-			}
-        );
+        // PublicIncludePaths.Add(ModuleDirectory);
+        // DynamicallyLoadedModuleNames.AddRange(
+        //     new string[]
+        //     {
+		// 		// ... add any modules that your module loads dynamically here ...
+		// 	}
+        // );
     }
 }

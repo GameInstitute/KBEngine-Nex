@@ -37,6 +37,8 @@
 #include "../../server/dbmgr/dbmgr_interface.h"
 #include "../../server/loginapp/loginapp_interface.h"
 
+
+
 namespace KBEngine{
 	
 ServerConfig g_serverConfig;
@@ -223,6 +225,7 @@ Baseapp::Baseapp(Network::EventDispatcher& dispatcher,
 			 COMPONENT_TYPE componentType,
 			 COMPONENT_ID componentID):
 	EntityApp<Entity>(dispatcher, ninterface, componentType, componentID),
+	asyncTimerTimers_(),
 	loopCheckTimerHandle_(),
 	pBaseAppData_(NULL),
 	pendingLoginMgr_(ninterface),
@@ -607,12 +610,63 @@ bool Baseapp::initializeBegin()
 	return true;
 }
 
+//-------------------------------------------------------------------------------------	
+
+/**
+内部定时器处理类
+*/
+class AsyncTimerHandler : public TimerHandler
+{
+public:
+	AsyncTimerHandler(ScriptTimers* scriptTimers, PyObject* callback) :
+		pyCallback_(callback),
+		asyncTimerTimers_(scriptTimers)
+	{
+		Py_INCREF(pyCallback_);
+	}
+
+	~AsyncTimerHandler()
+	{
+		Py_DECREF(pyCallback_);
+	}
+
+private:
+	virtual void handleTimeout(TimerHandle handle, void* pUser)
+	{
+		int id = ScriptTimersUtil::getIDForHandle(asyncTimerTimers_, handle);
+
+		PyObject* pyRet = PyObject_CallFunction(pyCallback_, "i", id);
+		if (pyRet == NULL)
+		{
+			SCRIPT_ERROR_CHECK();
+			return;
+		}
+		return;
+	}
+
+	virtual void onRelease(TimerHandle handle, void* /*pUser*/)
+	{
+		asyncTimerTimers_->releaseTimer(handle);
+		delete this;
+	}
+
+	PyObject* pyCallback_;
+	ScriptTimers* asyncTimerTimers_;
+};
 //-------------------------------------------------------------------------------------
 bool Baseapp::initializeEnd()
 {
 	// 添加一个timer， 每秒检查一些状态
 	loopCheckTimerHandle_ = this->dispatcher().addTimer(1000000, this,
 							reinterpret_cast<void *>(TIMEOUT_CHECK_STATUS));
+
+	// 添加一个timer用于python解释器保活
+	PyObject* dispatcherMod = PyImport_ImportModule("async_dispatcher");
+	PyObject* submitFunc = PyObject_GetAttrString(dispatcherMod, "onAsyncTimer");
+
+	ScriptTimers* pTimers = &asyncTimerTimers_;
+	AsyncTimerHandler*handler = new AsyncTimerHandler(pTimers, submitFunc);
+	ScriptTimersUtil::addTimer(&pTimers,0.1f,0.1f,0, handler);
 
 	if(Resmgr::respool_checktick > 0)
 	{
@@ -700,8 +754,10 @@ void Baseapp::onCellAppDeath(Network::Channel * pChannel)
 
 		Py_DECREF(pyarg);
 
-		if(pyResult != NULL)
+		if(pyResult != NULL) {
+			AsyncioHelper::submitCoroutine(pyResult);
 			Py_DECREF(pyResult);
+		}
 		else
 			SCRIPT_ERROR_CHECK();
 	}
@@ -3565,8 +3621,10 @@ void Baseapp::onChargeCB(Network::Channel* pChannel, KBEngine::MemoryStream& s)
 										const_cast<char*>("OOOO"), 
 										pyOrder, pydbid, pySuccess, pyBytes);
 
-		if(pyResult != NULL)
+		if(pyResult != NULL) {
+			AsyncioHelper::submitCoroutine(pyResult);
 			Py_DECREF(pyResult);
+		}
 		else
 			SCRIPT_ERROR_CHECK();
 	}
@@ -3603,8 +3661,10 @@ void Baseapp::onDbmgrInitCompleted(Network::Channel* pChannel,
 										const_cast<char*>("i"), 
 										0);
 
-	if(pyResult != NULL)
+	if(pyResult != NULL) {
+		AsyncioHelper::submitCoroutine(pyResult);
 		Py_DECREF(pyResult);
+	}
 	else
 		SCRIPT_ERROR_CHECK();
 

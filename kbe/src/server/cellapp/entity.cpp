@@ -1300,6 +1300,8 @@ bool Entity::bufferOrExeCallback(const char * funcName, PyObject * funcArgs, boo
 
 		if (pyResult)
 		{
+			// todo: 待测试：这里需要考虑协程的情况
+			AsyncioHelper::submitCoroutine(pyResult);
 			Py_DECREF(pyResult);
 		}
 		else
@@ -1332,6 +1334,8 @@ bool Entity::bufferOrExeCallback(const char * funcName, PyObject * funcArgs, boo
 
 					if (pyCompResult)
 					{
+						// todo: 待测试：这里需要考虑协程的情况
+						AsyncioHelper::submitCoroutine(pyCompResult);
 						Py_DECREF(pyCompResult);
 					}
 					else
@@ -1380,6 +1384,8 @@ void Entity::bufferCallback(bool enable)
 
 				if (pyResult)
 				{
+					// todo: 待测试：这里需要考虑协程的情况
+					AsyncioHelper::submitCoroutine(pyResult);
 					Py_DECREF(pyResult);
 				}
 				else
@@ -1412,6 +1418,8 @@ void Entity::bufferCallback(bool enable)
 
 							if (pyCompResult)
 							{
+								// todo: 待测试：这里需要考虑协程的情况
+								AsyncioHelper::submitCoroutine(pyCompResult);
 								Py_DECREF(pyCompResult);
 							}
 							else
