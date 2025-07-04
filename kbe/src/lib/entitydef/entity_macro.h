@@ -323,8 +323,10 @@ public:																										\
 		{																									\
 			PyObject* pyResult = PyObject_CallMethod(this, const_cast<char*>("__init__"),					\
 											const_cast<char*>(""));											\
-			if(pyResult != NULL)																			\
+			if(pyResult != NULL){																			\
+				AsyncioHelper::submitCoroutine(pyResult);													\
 				Py_DECREF(pyResult);																		\
+			}																								\
 			else																							\
 				SCRIPT_ERROR_CHECK();																		\
 		}																									\

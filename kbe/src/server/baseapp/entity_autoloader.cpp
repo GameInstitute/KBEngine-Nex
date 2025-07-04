@@ -88,8 +88,8 @@ void EntityAutoLoader::onEntityAutoLoadCBFromDBMgr(Network::Channel* pChannel, M
 												EntityDef::findScriptModule(entityType)->getName(),
 												dbid);
 
-			if(pyResult != NULL)
-			{
+			if(pyResult != NULL) {
+				AsyncioHelper::submitCoroutine(pyResult);
 				Py_DECREF(pyResult);
 			}
 			else

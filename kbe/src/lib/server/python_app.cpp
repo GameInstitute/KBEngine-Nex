@@ -711,8 +711,10 @@ void PythonApp::reloadScript(bool fullReload)
 										const_cast<char*>("i"), 
 										1);
 
-	if(pyResult != NULL)
+	if(pyResult != NULL) {
+		AsyncioHelper::submitCoroutine(pyResult);
 		Py_DECREF(pyResult);
+	}
 	else
 		SCRIPT_ERROR_CHECK();
 }

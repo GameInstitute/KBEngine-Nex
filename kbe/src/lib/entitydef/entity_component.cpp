@@ -239,8 +239,10 @@ void EntityComponent::initializeScript()
 		PyObject* pyResult = PyObject_CallMethod(this, const_cast<char*>("__init__"),
 			const_cast<char*>(""));
 
-		if (pyResult != NULL)
+		if (pyResult != NULL) {
+			AsyncioHelper::submitCoroutine(pyResult);
 			Py_DECREF(pyResult);
+		}
 		else
 			SCRIPT_ERROR_CHECK();
 	}
@@ -254,8 +256,10 @@ void EntityComponent::onAttached()
 		PyObject* pyResult = PyObject_CallMethod(this, const_cast<char*>("onAttached"),
 			const_cast<char*>("O"), owner());
 
-		if (pyResult != NULL)
+		if (pyResult != NULL) {
+			AsyncioHelper::submitCoroutine(pyResult);
 			Py_DECREF(pyResult);
+		}
 		else
 			SCRIPT_ERROR_CHECK();
 	}
@@ -269,8 +273,10 @@ void EntityComponent::onDetached()
 		PyObject* pyResult = PyObject_CallMethod(this, const_cast<char*>("onDetached"),
 			const_cast<char*>("O"), owner());
 
-		if (pyResult != NULL)
+		if (pyResult != NULL) {
+			AsyncioHelper::submitCoroutine(pyResult);
 			Py_DECREF(pyResult);
+		}
 		else
 			SCRIPT_ERROR_CHECK();
 	}

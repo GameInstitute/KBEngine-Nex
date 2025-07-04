@@ -754,8 +754,10 @@ void Baseapp::onCellAppDeath(Network::Channel * pChannel)
 
 		Py_DECREF(pyarg);
 
-		if(pyResult != NULL)
+		if(pyResult != NULL) {
+			AsyncioHelper::submitCoroutine(pyResult);
 			Py_DECREF(pyResult);
+		}
 		else
 			SCRIPT_ERROR_CHECK();
 	}
@@ -3619,8 +3621,10 @@ void Baseapp::onChargeCB(Network::Channel* pChannel, KBEngine::MemoryStream& s)
 										const_cast<char*>("OOOO"), 
 										pyOrder, pydbid, pySuccess, pyBytes);
 
-		if(pyResult != NULL)
+		if(pyResult != NULL) {
+			AsyncioHelper::submitCoroutine(pyResult);
 			Py_DECREF(pyResult);
+		}
 		else
 			SCRIPT_ERROR_CHECK();
 	}
@@ -3657,8 +3661,10 @@ void Baseapp::onDbmgrInitCompleted(Network::Channel* pChannel,
 										const_cast<char*>("i"), 
 										0);
 
-	if(pyResult != NULL)
+	if(pyResult != NULL) {
+		AsyncioHelper::submitCoroutine(pyResult);
 		Py_DECREF(pyResult);
+	}
 	else
 		SCRIPT_ERROR_CHECK();
 
