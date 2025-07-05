@@ -368,6 +368,7 @@ void Cellapp::finalise()
 	forward_messagebuffer_.clear();
 	updatables_.clear();
 
+	asyncTimerTimers_.cancelAll();
 	destroyObjPool();
 	EntityApp<Entity>::finalise();
 }

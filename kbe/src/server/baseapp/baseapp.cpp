@@ -713,6 +713,7 @@ void Baseapp::finalise()
 	loopCheckTimerHandle_.cancel();
 	pResmgrTimerHandle_.cancel();
 	forward_messagebuffer_.clear();
+	asyncTimerTimers_.cancelAll();
 
 	if (pBundleImportEntityDefDatas_)
 	{

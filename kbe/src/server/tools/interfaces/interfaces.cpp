@@ -263,6 +263,7 @@ void Interfaces::finalise()
 	}
 
 	pyCallbackMgr_.finalise();
+	asyncTimerTimers_.cancelAll();
 
 	PythonApp::finalise();
 }
