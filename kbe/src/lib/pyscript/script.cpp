@@ -319,7 +319,7 @@ bool Script::uninstall()
 	}
 
 	// –∂‘ÿpythonΩ‚ Õ∆˜
-	Py_Finalize();
+	//Py_Finalize();
 
 	INFO_MSG("Script::uninstall(): is successfully!\n");
 	return true;	
