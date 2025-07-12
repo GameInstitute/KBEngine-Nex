@@ -1,0 +1,60 @@
+name: Build KBEngine on Windows
+
+on:
+  push:
+    branches: [ master, dev-2.6.x ]
+  pull_request:
+    branches: [ master, dev-2.6.x ]
+  workflow_dispatch:  # 允许手动触发工作流
+
+jobs:
+  build:
+    name: Build KBEngine
+    runs-on: windows-2022  # 使用Windows Server 2022，包含Visual Studio 2022
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.1
+      with:
+        vs-version: '17.0'  # Visual Studio 2022
+
+    - name: Setup Developer Command Prompt
+      uses: ilammy/msvc-dev-cmd@v1
+      with:
+        arch: x64
+        toolset: '14.34'  # Visual Studio 2022 toolset
+
+    - name: Download Python Dependencies
+      run: |
+        cd src\lib\python\PCbuild
+        .\get_externals.bat
+      shell: cmd
+
+    - name: Build Python
+      run: |
+        cd src\lib\python\PCbuild
+        msbuild pcbuild.sln /p:Configuration=Release /p:Platform=x64 /m
+      shell: cmd
+
+    - name: Copy Python Build Results
+      run: |
+        cd src
+        msbuild "kbengine nex.sln" /p:Configuration=Release /p:Platform=x64 /t:pythonBuild /m
+      shell: cmd
+
+    - name: Build KBEngine
+      run: |
+        cd src
+        msbuild "kbengine nex.sln" /p:Configuration=Release /p:Platform=x64 /m
+      shell: cmd
+
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: kbengine-build
+        path: |
+          bin/server/
+          res/scripts/
