@@ -157,6 +157,9 @@ xcopy $(SolutionDir)lib\python\PCbuild\amd64 $(SolutionDir)..\res\scripts\common
 
 copy /Y "$(SolutionDir)lib\python\PCbuild\amd64\pyconfig.h" "$(SolutionDir)lib\python\Include"</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>call $(SolutionDir)lib\python\PCbuild\build.bat  -c Release</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
   </ItemGroup>
